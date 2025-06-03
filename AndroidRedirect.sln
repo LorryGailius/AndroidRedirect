@@ -5,6 +5,8 @@ VisualStudioVersion = 17.14.36109.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndroidRedirect.AppHost", "src\AndroidRedirect.AppHost\AndroidRedirect.AppHost.csproj", "{F86C3D4B-6D75-4506-B94D-D8610D5F540A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndroidRedirect.Builder", "src\AndroidRedirect.Builder\AndroidRedirect.Builder.csproj", "{3FCDB3F1-6E48-44A3-BA50-012C51BC9A94}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,6 +19,10 @@ Global
 		{F86C3D4B-6D75-4506-B94D-D8610D5F540A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F86C3D4B-6D75-4506-B94D-D8610D5F540A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F86C3D4B-6D75-4506-B94D-D8610D5F540A}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{3FCDB3F1-6E48-44A3-BA50-012C51BC9A94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FCDB3F1-6E48-44A3-BA50-012C51BC9A94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FCDB3F1-6E48-44A3-BA50-012C51BC9A94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FCDB3F1-6E48-44A3-BA50-012C51BC9A94}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
