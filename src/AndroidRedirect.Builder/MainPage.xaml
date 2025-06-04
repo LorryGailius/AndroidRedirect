@@ -5,8 +5,8 @@
              x:Class="AndroidRedirect.Builder.MainPage">
 
     <Grid Padding="20" RowDefinitions="Auto, *" RowSpacing="15">
-    <!-- Header -->
-    <Label 
+        <!-- Header -->
+        <Label 
         Grid.Row="0"
         Text="Android Redirect Builder"
         FontSize="24"
@@ -14,288 +14,155 @@
         TextColor="{StaticResource Primary}"
         HorizontalOptions="Center" />
 
-    <!-- Main Content in a Horizontal Layout -->
-    <Grid Grid.Row="1" ColumnDefinitions="*, Auto" ColumnSpacing="20">
-        
-        <!-- Left Column - Application Information and Image Uploads -->
-        <VerticalStackLayout Grid.Column="0" Spacing="15">
-            <!-- Application Information Section -->
-            <Frame Padding="20" Margin="0,0,0,5">
-                <VerticalStackLayout Spacing="10">
-                    <Label Text="APPLICATION INFORMATION" 
+        <!-- Main Content in a Horizontal Layout -->
+        <Grid Grid.Row="1" ColumnDefinitions="*, Auto" ColumnSpacing="20">
+
+            <!-- Left Column - Application Information and Image Uploads -->
+            <VerticalStackLayout Grid.Column="0" Spacing="15">
+                <!-- Application Information Section -->
+                <Frame Padding="20" Margin="0,0,0,5">
+                    <VerticalStackLayout Spacing="10">
+                        <Label Text="APPLICATION INFORMATION" 
                            FontFamily="InterSemiBold" 
                            FontSize="15"
                            TextColor="{StaticResource Primary}"/>
-                    
-                    <Label Text="Package Name" 
+
+                        <Label Text="Package Name" 
                            FontFamily="InterSemiBold" 
                            Margin="0,10,0,0" />
-                    <Label Text="Android package identifier (e.g., com.company.app)" 
+                        <Label Text="Android package identifier (e.g., com.company.app)" 
                            FontSize="12" 
                            TextColor="{StaticResource Gray500}" />
-                    <Entry x:Name="PackageNameEntry" 
+                        <Entry x:Name="PackageNameEntry" 
                            Placeholder="com.example.app" 
+                           IsSpellCheckEnabled="False"
                            PlaceholderColor="{StaticResource Gray500}"
                            Text="{Binding PackageName}" />
 
-                    <Label Text="App Name" 
+                        <Label Text="App Name" 
                            FontFamily="InterSemiBold" 
+                               
                            Margin="0,10,0,0" />
-                    <Label Text="Name shown on app drawer and desktop" 
+                        <Label Text="Name shown on app drawer and desktop" 
                            FontSize="12" 
                            TextColor="{StaticResource Gray500}" />
-                    <Entry x:Name="AppNameEntry" 
+                        <Entry x:Name="AppNameEntry" 
+                               IsSpellCheckEnabled="False"
                            Placeholder="My Application" 
                            PlaceholderColor="{StaticResource Gray500}"
                            Text="{Binding AppName}" />
-                </VerticalStackLayout>
-            </Frame>
-            
-            <!-- Image Upload Section with a Horizontal Row -->
-            <Frame Padding="20">
-                <VerticalStackLayout Spacing="15">
-                    <Label Text="APP ICON IMAGES" 
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Image Upload Section with a Horizontal Row -->
+                <Frame Padding="20">
+                    <VerticalStackLayout Spacing="15">
+                        <Label Text="APP ICON IMAGES" 
                            FontFamily="InterSemiBold" 
                            FontSize="15"
                            TextColor="{StaticResource Primary}"/>
-                    
-                    <!-- All three images in a horizontal row -->
-                    <HorizontalStackLayout Spacing="15" HorizontalOptions="Center">
-                        <!-- Foreground Image -->
-                        <VerticalStackLayout Spacing="5">
-                            <Label Text="Foreground" 
-                                   FontFamily="InterSemiBold"
-                                   HorizontalOptions="Center" />
-                            
-                            <Frame WidthRequest="120" 
-                                   HeightRequest="120" 
-                                   Padding="0" 
-                                   BorderColor="{StaticResource Primary}"
-                                   BackgroundColor="{StaticResource Gray100}"
-                                   CornerRadius="16">
-                                <Grid>
-                                    <!-- The image preview -->
-                                    <Image x:Name="ForegroundImagePreview" 
-                                           Aspect="AspectFit"
-                                           HorizontalOptions="Center"
-                                           VerticalOptions="Center" />
-                                    
-                                    <!-- Clickable overlay for selecting image -->
-                                    <Grid x:Name="ForegroundImageOverlay" 
-                                          BackgroundColor="{StaticResource Gray200}"
-                                          Opacity="0.7">
-                                        <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
-                                            <Label Text="+" 
-                                                   FontSize="30" 
-                                                   FontFamily="InterRegular"
-                                                   HorizontalOptions="Center" 
-                                                   TextColor="{StaticResource Primary}" />
-                                            <Label Text="Add Image" 
-                                                   FontSize="12" 
-                                                   FontFamily="InterLight"
-                                                   HorizontalOptions="Center" 
-                                                   TextColor="{StaticResource Primary}" />
-                                        </VerticalStackLayout>
-                                    </Grid>
-                                    
-                                    <!-- Transparent button to handle tap -->
-                                    <Button BackgroundColor="Transparent" 
-                                            Clicked="OnSelectForegroundImageClicked" />
-                                </Grid>
-                            </Frame>
-                            
-                            <Label Text="App logo" 
-                                   FontSize="11"
-                                   FontFamily="InterLight"
-                                   TextColor="{StaticResource Gray500}"
-                                   HorizontalOptions="Center" />
-                        </VerticalStackLayout>
-                        
-                        <!-- Background Image -->
-                        <VerticalStackLayout Spacing="5">
-                            <Label Text="Background" 
-                                   FontFamily="InterSemiBold"
-                                   HorizontalOptions="Center" />
-                            
-                            <Frame WidthRequest="120" 
-                                   HeightRequest="120" 
-                                   Padding="0" 
-                                   BorderColor="{StaticResource Primary}"
-                                   BackgroundColor="{StaticResource Gray100}"
-                                   CornerRadius="16">
-                                <Grid>
-                                    <!-- The image preview -->
-                                    <Image x:Name="BackgroundImagePreview" 
-                                           Aspect="AspectFit"
-                                           HorizontalOptions="Center"
-                                           VerticalOptions="Center" />
-                                    
-                                    <!-- Clickable overlay for selecting image -->
-                                    <Grid x:Name="BackgroundImageOverlay" 
-                                          BackgroundColor="{StaticResource Gray200}"
-                                          Opacity="0.7">
-                                        <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
-                                            <Label Text="+" 
-                                                   FontSize="30" 
-                                                   FontFamily="InterRegular"
-                                                   HorizontalOptions="Center" 
-                                                   TextColor="{StaticResource Primary}" />
-                                            <Label Text="Add Image" 
-                                                   FontSize="12" 
-                                                   FontFamily="InterLight"
-                                                   HorizontalOptions="Center" 
-                                                   TextColor="{StaticResource Primary}" />
-                                        </VerticalStackLayout>
-                                    </Grid>
-                                    
-                                    <!-- Transparent button to handle tap -->
-                                    <Button BackgroundColor="Transparent" 
-                                            Clicked="OnSelectBackgroundImageClicked" />
-                                </Grid>
-                            </Frame>
-                            
-                            <Label Text="Icon background" 
-                                   FontSize="11"
-                                   FontFamily="InterLight"
-                                   TextColor="{StaticResource Gray500}"
-                                   HorizontalOptions="Center" />
-                        </VerticalStackLayout>
-                        
-                        <!-- Monochromatic Image -->
-                        <VerticalStackLayout Spacing="5">
-                            <Label Text="Monochromatic" 
-                                   FontFamily="InterSemiBold"
-                                   HorizontalOptions="Center" />
-                            
-                            <Frame WidthRequest="120" 
-                                   HeightRequest="120" 
-                                   Padding="0" 
-                                   BorderColor="{StaticResource Primary}"
-                                   BackgroundColor="{StaticResource Gray100}"
-                                   CornerRadius="16">
-                                <Grid>
-                                    <!-- The image preview -->
-                                    <Image x:Name="MonochromaticImagePreview" 
-                                           Aspect="AspectFit"
-                                           HorizontalOptions="Center"
-                                           VerticalOptions="Center" />
-                                    
-                                    <!-- Clickable overlay for selecting image -->
-                                    <Grid x:Name="MonochromaticImageOverlay" 
-                                          BackgroundColor="{StaticResource Gray200}"
-                                          Opacity="0.7">
-                                        <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
-                                            <Label Text="+" 
-                                                   FontSize="30" 
-                                                   FontFamily="InterRegular"
-                                                   HorizontalOptions="Center" 
-                                                   TextColor="{StaticResource Primary}" />
-                                            <Label Text="Add Image" 
-                                                   FontSize="12" 
-                                                   FontFamily="InterLight"
-                                                   HorizontalOptions="Center" 
-                                                   TextColor="{StaticResource Primary}" />
-                                        </VerticalStackLayout>
-                                    </Grid>
-                                    
-                                    <!-- Transparent button to handle tap -->
-                                    <Button BackgroundColor="Transparent" 
-                                            Clicked="OnSelectMonochromaticImageClicked" />
-                                </Grid>
-                            </Frame>
-                            
-                            <Label Text="Monochrome version" 
-                                   FontSize="11"
-                                   FontFamily="InterLight"
-                                   TextColor="{StaticResource Gray500}"
-                                   HorizontalOptions="Center" />
-                        </VerticalStackLayout>
-                    </HorizontalStackLayout>
-                </VerticalStackLayout>
-            </Frame>
-        </VerticalStackLayout>
-        
-        <!-- Right Column - Build Button and Previews -->
-        <VerticalStackLayout Grid.Column="1" Spacing="15" WidthRequest="300">
-            <!-- Build Button at the top right -->
-            <Button Text="BUILD APPLICATION" 
+
+                        <HorizontalStackLayout Spacing="15" HorizontalOptions="Center">
+                            <!-- Foreground Image -->
+                            <controls:ImagePicker 
+                            TopLabelText="Foreground" 
+                            BottomLabelText="App logo"
+                            FrameSize="120"
+                            ImageSource="{Binding ForegroundImagePath}"/>
+
+                            <!-- Background Image -->
+                            <controls:ImagePicker 
+                            TopLabelText="Background" 
+                            BottomLabelText="Icon background"
+                            FrameSize="120"
+                            ImageSource="{Binding BackgroundImagePath}"/>
+
+                            <!-- Monochromatic Image -->
+                            <controls:ImagePicker 
+                            TopLabelText="Monochromatic" 
+                            BottomLabelText="Monochrome version"
+                            FrameSize="120"
+                            ImageSource="{Binding MonochromaticImagePath}"/>
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </Frame>
+            </VerticalStackLayout>
+
+            <!-- Right Column - Build Button and Previews -->
+            <VerticalStackLayout Grid.Column="1" Spacing="15" WidthRequest="300">
+                <Button Text="BUILD APPLICATION" 
                     FontFamily="InterSemiBold"
                     Clicked="OnBuildClicked"
                     HeightRequest="50"
                     FontSize="16"
                     Margin="0,0,0,15" />
-            
-            <!-- Combined Preview Section -->
-            <Frame Padding="20">
-                <VerticalStackLayout Spacing="15">
-                    <Label Text="PREVIEW" 
+
+                <!-- Combined Preview Section -->
+                <Frame Padding="20">
+                    <VerticalStackLayout Spacing="15">
+                        <Label Text="PREVIEW" 
                            FontFamily="InterSemiBold" 
                            FontSize="15"
                            TextColor="{StaticResource Primary}"
                            HorizontalOptions="Center"/>
-                    
-                    <!-- Combined Preview -->
-                    <VerticalStackLayout Spacing="10">
-                        <Label Text="Combined Preview" 
+
+                        <!-- Combined Preview -->
+                        <VerticalStackLayout Spacing="10">
+                            <Label Text="Combined Preview" 
                                HorizontalOptions="Center"
                                FontFamily="InterSemiBold"
                                Margin="0,0,0,5" />
-                        
-                        <Frame WidthRequest="120" 
+
+                            <Frame WidthRequest="120" 
                                HeightRequest="120" 
                                Padding="0" 
                                BorderColor="{StaticResource Primary}"
                                BackgroundColor="{StaticResource Gray100}"
                                CornerRadius="16"
                                HorizontalOptions="Center">
-                            <AbsoluteLayout>
-                                <!-- Background image fills the entire space -->
-                                <Image x:Name="CombinedBackgroundPreview"
+                                <AbsoluteLayout>
+                                    <Image x:Name="CombinedBackgroundPreview"
                                        AbsoluteLayout.LayoutBounds="0,0,1,1"
                                        AbsoluteLayout.LayoutFlags="All"
                                        Aspect="AspectFill" />
-                                
-                                <!-- Foreground image positioned on top with exact alignment -->
-                                <Image x:Name="CombinedForegroundPreview"
+                                    <Image x:Name="CombinedForegroundPreview"
                                        AbsoluteLayout.LayoutBounds="0,0,1,1"
                                        AbsoluteLayout.LayoutFlags="All"
                                        Aspect="AspectFit" />
-                            </AbsoluteLayout>
-                        </Frame>
-                    </VerticalStackLayout>
-                    
-                    <!-- Monochromatic Preview with Color Switcher -->
-                    <VerticalStackLayout Spacing="10">
-                        <Label Text="Monochromatic Preview" 
+                                </AbsoluteLayout>
+                            </Frame>
+                        </VerticalStackLayout>
+
+                        <!-- Adaptive Icon Preview with Color Switcher -->
+                        <VerticalStackLayout Spacing="10">
+                            <Label Text="Adaptive Icon Preview" 
                                HorizontalOptions="Center"
                                FontFamily="InterSemiBold"
                                Margin="0,10,0,5" />
-                        
-                        <Grid RowDefinitions="Auto, Auto" RowSpacing="10">
-                            <!-- Monochromatic Image Preview - Changed to circular -->
-                            <Frame Grid.Row="0"
+
+                            <Grid RowDefinitions="Auto, Auto" RowSpacing="10">
+                                <Frame Grid.Row="0"
                                    WidthRequest="120" 
                                    HeightRequest="120" 
                                    Padding="0" 
                                    BorderColor="{StaticResource Primary}"
                                    BackgroundColor="{StaticResource Gray100}"
                                    HorizontalOptions="Center">
-                                <Image x:Name="AdaptiveIconPreview"
+                                    <Image x:Name="AdaptiveIconPreview"
                                        Aspect="AspectFill"
                                        HorizontalOptions="Center"
                                        VerticalOptions="Center" />
-                            </Frame>
-                            
-                            <!-- Color Swatches Picker Control -->
-                            <controls:ColorSwatchesPicker 
+                                </Frame>
+
+                                <controls:ColorSwatchesPicker 
                                 Grid.Row="1"
                                 x:Name="ColorPicker"
                                 ColorSelected="OnColorPicker_ColorSelected" />
-                        </Grid>
+                            </Grid>
+                        </VerticalStackLayout>
                     </VerticalStackLayout>
-                </VerticalStackLayout>
-            </Frame>
-        </VerticalStackLayout>
+                </Frame>
+            </VerticalStackLayout>
+        </Grid>
     </Grid>
-</Grid>
 </ContentPage>
