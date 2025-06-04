@@ -2,30 +2,29 @@
 using System.Drawing;
 using System.Runtime.CompilerServices;
 using Microsoft.Extensions.Logging;
-using Microsoft.Maui.Controls.Shapes;
-using Color = Microsoft.Maui.Graphics.Color;
 using ImageFormat = System.Drawing.Imaging.ImageFormat;
+using AndroidRedirect.Builder.Controls;
+using AndroidRedirect.Builder.Extensions;
 
 namespace AndroidRedirect.Builder
 {
-    public partial class MainPage : ContentPage, INotifyPropertyChanged
+    public partial class MainPage : INotifyPropertyChanged
     {
-        // Static list of colors for monochromatic tinting
-        public static readonly List<Color> MonochromaticColors = new List<Color>
-        {
-            Color.FromArgb("#50C878"), // Emerald Green (first color is default)
-            Color.FromArgb("#F6C177"), // Primary (Yellow)
-            Color.FromArgb("#EB6F92"), // Tertiary (Rose)
-            Color.FromArgb("#9CCFD8"), // Light Blue
-        };
-
         private readonly ILogger<MainPage> _logger;
         private string _packageName;
         private string _appName;
         private string _foregroundImagePath;
         private string _backgroundImagePath;
         private string _monochromaticImagePath;
-        private Color _monochromaticTintColor = MonochromaticColors[0]; // Default is first color in the list
+        private SystemColor _foregroundIconColor;
+        private SystemColor _backgroundIconColor;
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            ColorPicker.Init();
+        }
 
         public string PackageName
         {
@@ -95,98 +94,11 @@ namespace AndroidRedirect.Builder
             }
         }
 
-        public Color MonochromaticTintColor
-        {
-            get => _monochromaticTintColor;
-            set
-            {
-                if (_monochromaticTintColor != value)
-                {
-                    _monochromaticTintColor = value;
-                    OnPropertyChanged();
-                    UpdateMonochromaticTintColor();
-                }
-            }
-        }
-
         public MainPage(ILogger<MainPage> logger)
         {
             InitializeComponent();
             _logger = logger;
             BindingContext = this;
-        }
-
-        public void OnColorSelected(object sender, TappedEventArgs e)
-        {
-            if (sender is Border frame && frame.BindingContext is int colorIndex &&
-                colorIndex >= 0 && colorIndex < MonochromaticColors.Count)
-            {
-                MonochromaticTintColor = MonochromaticColors[colorIndex];
-                UpdateColorSwatchHighlight(colorIndex);
-            }
-        }
-
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-
-            ColorSwatchesContainer.Children.Clear();
-
-            for (int i = 0; i < MonochromaticColors.Count; i++)
-            {
-                var color = MonochromaticColors[i];
-
-                var box = new BoxView
-                {
-                    WidthRequest = 30,
-                    HeightRequest = 30,
-                    CornerRadius = 60,
-                    BackgroundColor = color,
-                };
-
-                var border = new Border
-                {
-                    Content = box,
-                    WidthRequest = 40,
-                    HeightRequest = 40,
-                    Padding = 0,
-                    BindingContext = i,
-                    StrokeThickness = 3,
-                    StrokeShape = new RoundRectangle { CornerRadius = 60 },
-                    Stroke = Colors.White,
-                    Background = Colors.Transparent
-                };
-
-
-                var tapGesture = new TapGestureRecognizer();
-                tapGesture.Tapped += OnColorSelected;
-                border.GestureRecognizers.Add(tapGesture);
-
-                ColorSwatchesContainer.Children.Add(border);
-            }
-            UpdateColorSwatchHighlight(MonochromaticColors.IndexOf(MonochromaticTintColor));
-        }
-
-        private void UpdateColorSwatchHighlight(int selectedIndex)
-        {
-            // Update the visual appearance of all color swatches
-            for (int i = 0; i < ColorSwatchesContainer.Children.Count; i++)
-            {
-                if (ColorSwatchesContainer.Children[i] is Border frame)
-                {
-                    if (frame.BindingContext is int colorIndex)
-                    {
-                        if (colorIndex == selectedIndex)
-                        {
-                            frame.StrokeThickness = 5;
-                        }
-                        else
-                        {
-                            frame.StrokeThickness = 3;
-                        }
-                    }
-                }
-            }
         }
 
         private async void OnSelectForegroundImageClicked(object sender, EventArgs e)
@@ -282,20 +194,27 @@ namespace AndroidRedirect.Builder
             {
                 MonochromaticImageOverlay.IsVisible = true;
                 MonochromaticImagePreview.Source = null;
-                MonochromaticPreview.Source = null;
+                AdaptiveIconPreview.Source = null;
             }
             else
             {
                 MonochromaticImageOverlay.IsVisible = false;
                 MonochromaticImagePreview.Source = MonochromaticImagePath;
-                MonochromaticPreview.Source = MonochromaticImagePath;
+                AdaptiveIconPreview.Source = MonochromaticImagePath;
 
-                // Apply tint color to the monochromatic preview
-                UpdateMonochromaticTintColor();
+                UpdateAdaptiveIconPreview();
             }
         }
 
-        private void UpdateMonochromaticTintColor()
+        private void OnColorPicker_ColorSelected(object sender, ColorSelectedEventArgs e)
+        {
+            _foregroundIconColor = e.ForegroundColor;
+            _backgroundIconColor = e.BackgroundColor;
+
+            UpdateAdaptiveIconPreview();
+        }
+
+        private void UpdateAdaptiveIconPreview()
         {
             if (string.IsNullOrEmpty(MonochromaticImagePath))
                 return;
@@ -304,100 +223,33 @@ namespace AndroidRedirect.Builder
             {
                 using var bitmap = new Bitmap(MonochromaticImagePath);
 
-                var tintColor = System.Drawing.Color.FromArgb(
-                    255, // Full alpha
-                    (int)(MonochromaticTintColor.Red * 255),
-                    (int)(MonochromaticTintColor.Green * 255),
-                    (int)(MonochromaticTintColor.Blue * 255));
-
-                var tintColorBG = GetAdaptiveIconBackgroundColor(tintColor);
-
-                for (int y = 0; y < bitmap.Height; y++)
+                for (var y = 0; y < bitmap.Height; y++)
                 {
-                    for (int x = 0; x < bitmap.Width; x++)
+                    for (var x = 0; x < bitmap.Width; x++)
                     {
                         var pixelColor = bitmap.GetPixel(x, y);
                         if (pixelColor.A > 0)
                         {
-                            pixelColor = System.Drawing.Color.FromArgb(
-                                pixelColor.A, // Preserve original alpha
-                                tintColor.R, // Apply tint color
-                                tintColor.G,
-                                tintColor.B);
-
-                            bitmap.SetPixel(x, y, pixelColor);
+                            pixelColor = _foregroundIconColor.Alpha(pixelColor.A); // Apply tint color with original alpha
                         }
                         else
                         {
-                            pixelColor = tintColorBG;
-
-                            bitmap.SetPixel(x, y, pixelColor);
+                            pixelColor = _backgroundIconColor;
                         }
+
+                        bitmap.SetPixel(x, y, pixelColor);
                     }
                 }
 
                 var memoryStream = new MemoryStream();
                 bitmap.Save(memoryStream, ImageFormat.Png);
                 memoryStream.Seek(0, SeekOrigin.Begin);
-                MonochromaticPreview.Source = ImageSource.FromStream(() => memoryStream);
+                AdaptiveIconPreview.Source = ImageSource.FromStream(() => memoryStream);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error updating monochromatic tint color");
             }
-        }
-
-        public static System.Drawing.Color GetAdaptiveIconBackgroundColor(System.Drawing.Color themeColor)
-        {
-            float r = themeColor.R / 255f;
-            float g = themeColor.G / 255f;
-            float b = themeColor.B / 255f;
-
-            float max = Math.Max(r, Math.Max(g, b));
-            float min = Math.Min(r, Math.Min(g, b));
-            float h = 0, s = 0, l = (max + min) / 2f;
-
-            if (max != min)
-            {
-                float d = max - min;
-                s = l > 0.5f ? d / (2f - max - min) : d / (max + min);
-
-                if (max == r)
-                    h = (g - b) / d + (g < b ? 6f : 0f);
-                else if (max == g)
-                    h = (b - r) / d + 2f;
-                else
-                    h = (r - g) / d + 4f;
-
-                h /= 6f;
-            }
-
-            s *= 0.2f;
-            l *= 0.25f;
-
-            Func<float, float, float, float> hue2rgb = (p, q, t) =>
-            {
-                if (t < 0f) t += 1f;
-                if (t > 1f) t -= 1f;
-                if (t < 1f / 6f) return p + (q - p) * 6f * t;
-                if (t < 1f / 2f) return q;
-                if (t < 2f / 3f) return p + (q - p) * (2f / 3f - t) * 6f;
-                return p;
-            };
-
-            float q = l < 0.5f ? l * (1f + s) : l + s - l * s;
-            float p = 2f * l - q;
-
-            r = hue2rgb(p, q, h + 1f / 3f);
-            g = hue2rgb(p, q, h);
-            b = hue2rgb(p, q, h - 1f / 3f);
-
-            return System.Drawing.Color.FromArgb(
-                255,
-                (int)(r * 255),
-                (int)(g * 255),
-                (int)(b * 255)
-            );
         }
 
         private void UpdateCombinedPreview()

@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:AndroidRedirect.Builder.Controls"
              x:Class="AndroidRedirect.Builder.MainPage">
 
     <Grid Padding="20" RowDefinitions="Auto, *" RowSpacing="15">
@@ -279,19 +280,17 @@
                                    BorderColor="{StaticResource Primary}"
                                    BackgroundColor="{StaticResource Gray100}"
                                    HorizontalOptions="Center">
-                                <Image x:Name="MonochromaticPreview"
+                                <Image x:Name="AdaptiveIconPreview"
                                        Aspect="AspectFill"
                                        HorizontalOptions="Center"
                                        VerticalOptions="Center" />
                             </Frame>
                             
-                            <!-- Color Switcher Circles -->
-                            <HorizontalStackLayout Grid.Row="1" 
-                                                   Spacing="10" 
-                                                   HorizontalOptions="Center"
-                                                   x:Name="ColorSwatchesContainer">
-                                <!-- This will be populated dynamically in code-behind -->
-                            </HorizontalStackLayout>
+                            <!-- Color Swatches Picker Control -->
+                            <controls:ColorSwatchesPicker 
+                                Grid.Row="1"
+                                x:Name="ColorPicker"
+                                ColorSelected="OnColorPicker_ColorSelected" />
                         </Grid>
                     </VerticalStackLayout>
                 </VerticalStackLayout>
