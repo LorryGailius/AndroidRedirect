@@ -1,4 +1,4 @@
-namespace AndroidRedirect.Builder.Controls
+namespace AndroidRedirect.Builder.Resources.Controls
 {
     public partial class ImagePicker
     {

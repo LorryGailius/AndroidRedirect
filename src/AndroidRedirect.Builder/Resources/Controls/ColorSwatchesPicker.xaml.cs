@@ -1,7 +1,7 @@
 using AndroidRedirect.Builder.Extensions;
 using Microsoft.Maui.Controls.Shapes;
 
-namespace AndroidRedirect.Builder.Controls
+namespace AndroidRedirect.Builder.Resources.Controls
 {
     public partial class ColorSwatchesPicker
     {

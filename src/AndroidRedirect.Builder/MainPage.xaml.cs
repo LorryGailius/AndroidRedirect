@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
-using AndroidRedirect.Builder.Controls;
 using AndroidRedirect.Builder.Extensions;
+using AndroidRedirect.Builder.Resources.Controls;
 using AndroidRedirect.Builder.Services;
 using Microsoft.Extensions.Logging;
 using ImageFormat = System.Drawing.Imaging.ImageFormat;
