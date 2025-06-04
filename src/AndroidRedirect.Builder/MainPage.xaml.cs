@@ -17,8 +17,26 @@ namespace AndroidRedirect.Builder
         protected override void OnAppearing()
         {
             base.OnAppearing();
-
             ColorPicker.Init();
+
+            FetchAppHost(
+                "App Host Required",
+                "Please select a valid app host directory .csproj file.",
+                "OK");
+        }
+
+        protected void FetchAppHost(string title, string message, string cancel)
+        {
+            Loaded += OnLoaded;
+            return;
+
+            async void OnLoaded(object sender, EventArgs e)
+            {
+                await DisplayAlert(title, message, cancel);
+
+                await _applicationBuilder.GetAppHostDirectory();
+                Loaded -= OnLoaded;
+            }
         }
 
         public string PackageName { get; set; }

@@ -8,5 +8,7 @@ namespace AndroidRedirect.Builder.Services
             string foregroundImagePath, 
             string backgroundImagePath, 
             string monochromaticImagePath);
+
+        Task GetAppHostDirectory();
     }
 }
