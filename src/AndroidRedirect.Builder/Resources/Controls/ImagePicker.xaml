@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AndroidRedirect.Builder.Controls.ImagePicker"
+             x:Name="Root">
+
+    <ContentView.Content>
+        <VerticalStackLayout Spacing="5">
+            <!-- Top Label -->
+            <Label x:Name="TopLabel"
+                   Text="{Binding TopLabelText, Source={x:Reference Root}}"
+                   FontFamily="InterSemiBold"
+                   HorizontalOptions="Center" />
+            
+            <!-- Image Frame -->
+            <Frame x:Name="ImageFrame"
+                   WidthRequest="{Binding FrameSize, Source={x:Reference Root}}"
+                   HeightRequest="{Binding FrameSize, Source={x:Reference Root}}"
+                   Padding="0" 
+                   BorderColor="{StaticResource Primary}"
+                   BackgroundColor="{StaticResource Gray100}"
+                   CornerRadius="16">
+                <Grid>
+                    <!-- The image preview -->
+                    <Image x:Name="ImagePreview" 
+                           Aspect="AspectFit"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center" />
+                    
+                    <!-- Clickable overlay for selecting image -->
+                    <Grid x:Name="ImageOverlay" 
+                          BackgroundColor="{StaticResource Gray200}"
+                          Opacity="0.7">
+                        <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                            <Label Text="+" 
+                                   FontSize="30" 
+                                   FontFamily="InterRegular"
+                                   HorizontalOptions="Center" 
+                                   TextColor="{StaticResource Primary}" />
+                            <Label Text="Add Image" 
+                                   FontSize="12" 
+                                   FontFamily="InterLight"
+                                   HorizontalOptions="Center" 
+                                   TextColor="{StaticResource Primary}" />
+                        </VerticalStackLayout>
+                    </Grid>
+                    
+                    <!-- Transparent button to handle tap -->
+                    <Button BackgroundColor="Transparent" 
+                            Clicked="OnSelectImageClicked" />
+                </Grid>
+            </Frame>
+            
+            <!-- Bottom Label -->
+            <Label x:Name="BottomLabel"
+                   Text="{Binding BottomLabelText, Source={x:Reference Root}}"
+                   FontSize="11"
+                   FontFamily="InterLight"
+                   TextColor="{StaticResource Gray500}"
+                   HorizontalOptions="Center" />
+        </VerticalStackLayout>
+    </ContentView.Content>
+</ContentView>
