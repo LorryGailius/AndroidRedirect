@@ -145,7 +145,7 @@ namespace AndroidRedirect.Builder
 
         private void OnBuildClicked(object sender, EventArgs e)
         { 
-            _applicationBuilder.BuildApplicationAsync(
+            _applicationBuilder.BuildApplication(
                 PackageName,
                 AppName,
                 ForegroundImagePath,

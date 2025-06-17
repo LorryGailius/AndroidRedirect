@@ -2,7 +2,7 @@ namespace AndroidRedirect.Builder.Services
 {
     public interface IApplicationBuilderService
     {
-        Task BuildApplicationAsync(
+        Task BuildApplication(
             string packageName, 
             string appName, 
             string foregroundImagePath, 
