@@ -1,6 +1,4 @@
-using Microsoft.Maui.Controls;
 using Microsoft.Maui.Controls.Shapes;
-using Microsoft.Maui.Graphics;
 
 namespace AndroidRedirect.Builder.Extensions
 {
@@ -17,7 +15,6 @@ namespace AndroidRedirect.Builder.Extensions
         /// <returns>A reference to the loading page that was created</returns>
         public static Task<Page> ShowLoadingAsync(this Page page, string message = "Loading...")
         {
-            // Create loading indicator
             var activityIndicator = new ActivityIndicator
             {
                 IsRunning = true,
@@ -27,7 +24,6 @@ namespace AndroidRedirect.Builder.Extensions
                 HorizontalOptions = LayoutOptions.Center
             };
 
-            // Create message label
             var messageLabel = new Label
             {
                 Text = message,
@@ -39,7 +35,6 @@ namespace AndroidRedirect.Builder.Extensions
                 Margin = new Thickness(0, 15, 0, 0)
             };
 
-            // Create a simple vertical stack for the content
             var contentStack = new VerticalStackLayout
             {
                 Children = 
@@ -52,7 +47,6 @@ namespace AndroidRedirect.Builder.Extensions
                 VerticalOptions = LayoutOptions.Center
             };
 
-            // Create a simple background for the content
             var contentBackground = new Border
             {
                 Content = contentStack,
@@ -68,13 +62,11 @@ namespace AndroidRedirect.Builder.Extensions
                 VerticalOptions = LayoutOptions.Center
             };
 
-            // Create a simple overlay page
             var grid = new Grid
             {
                 BackgroundColor = new Color(0, 0, 0, 0.5f)
             };
 
-            // Place the content exactly in the center
             grid.Add(contentBackground);
 
             var loadingPage = new ContentPage
@@ -83,7 +75,6 @@ namespace AndroidRedirect.Builder.Extensions
                 BackgroundColor = Colors.Transparent
             };
 
-            // Show as a modal
             try
             {
                 if (page?.Navigation != null)
@@ -117,7 +108,6 @@ namespace AndroidRedirect.Builder.Extensions
 
             try
             {
-                // Hide the loading page
                 if (page?.Navigation != null)
                 {
                     await page.Navigation.RemoveModalPageAsync(loadingPage);
