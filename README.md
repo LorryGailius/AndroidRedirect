@@ -13,11 +13,9 @@ If there is an application which does not support android adaptive icons this so
 
 ## Example
 
-### Before (Non-Adaptive Icon)
-![Non-Adaptive Icon](./assets/not-adaptive.png)
-
-### After (Adaptive Icon)
-![Adaptive Icon](./assets/adaptive.png)
+| Before (Non-Adaptive Icon) | After (Adaptive Icon) |
+|:---------------------------:|:---------------------:|
+| ![Non-Adaptive Icon](./assets/not-adaptive.png) | ![Adaptive Icon](./assets/adaptive.png) |
 
 ## Interface
 ![Interface Screenshot](./assets/main-screen.png)
