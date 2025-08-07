@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:AndroidRedirect.Builder.Resources.Controls"
+             x:Class="AndroidRedirect.Builder.MainPage">
+
+    <Grid Padding="20" RowDefinitions="Auto, *" RowSpacing="15">
+        <!-- Header -->
+        <Label 
+        Grid.Row="0"
+        Text="Android Redirect Builder"
+        FontSize="24"
+        FontFamily="InterSemiBold"
+        TextColor="{StaticResource Primary}"
+        HorizontalOptions="Center" />
+
+        <!-- Main Content in a Horizontal Layout -->
+        <Grid Grid.Row="1" ColumnDefinitions="*, Auto" ColumnSpacing="20">
+
+            <!-- Left Column - Application Information and Image Uploads -->
+            <VerticalStackLayout Grid.Column="0" Spacing="15">
+                <!-- Application Information Section -->
+                <Frame Padding="20" Margin="0,0,0,5">
+                    <VerticalStackLayout Spacing="10">
+                        <Label Text="APPLICATION INFORMATION" 
+                           FontFamily="InterSemiBold" 
+                           FontSize="15"
+                           TextColor="{StaticResource Primary}"/>
+
+                        <Label Text="Package Name" 
+                           FontFamily="InterSemiBold" 
+                           Margin="0,10,0,0" />
+                        <Label Text="Android package identifier (e.g., com.company.app)" 
+                           FontSize="12" 
+                           TextColor="{StaticResource Gray500}" />
+                        <Entry x:Name="PackageNameEntry" 
+                           Placeholder="com.example.app" 
+                           IsSpellCheckEnabled="False"
+                           PlaceholderColor="{StaticResource Gray500}"
+                           Text="{Binding PackageName}" />
+
+                        <Label Text="App Name" 
+                           FontFamily="InterSemiBold" 
+                               
+                           Margin="0,10,0,0" />
+                        <Label Text="Name shown on app drawer and desktop" 
+                           FontSize="12" 
+                           TextColor="{StaticResource Gray500}" />
+                        <Entry x:Name="AppNameEntry" 
+                               IsSpellCheckEnabled="False"
+                           Placeholder="My Application" 
+                           PlaceholderColor="{StaticResource Gray500}"
+                           Text="{Binding AppName}" />
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Image Upload Section with a Horizontal Row -->
+                <Frame Padding="20">
+                    <VerticalStackLayout Spacing="15">
+                        <Label Text="APP ICON IMAGES" 
+                           FontFamily="InterSemiBold" 
+                           FontSize="15"
+                           TextColor="{StaticResource Primary}"/>
+
+                        <HorizontalStackLayout Spacing="15" HorizontalOptions="Center">
+                            <!-- Foreground Image -->
+                            <controls:ImagePicker 
+                            TopLabelText="Foreground" 
+                            BottomLabelText="App logo"
+                            FrameSize="120"
+                            ImageSource="{Binding ForegroundImagePath}"/>
+
+                            <!-- Background Image -->
+                            <controls:ImagePicker 
+                            TopLabelText="Background" 
+                            BottomLabelText="Icon background"
+                            FrameSize="120"
+                            ImageSource="{Binding BackgroundImagePath}"/>
+
+                            <!-- Monochromatic Image -->
+                            <controls:ImagePicker 
+                            TopLabelText="Monochromatic" 
+                            BottomLabelText="Monochrome version"
+                            FrameSize="120"
+                            ImageSource="{Binding MonochromaticImagePath}"/>
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </Frame>
+            </VerticalStackLayout>
+
+            <!-- Right Column - Build Button and Previews -->
+            <VerticalStackLayout Grid.Column="1" Spacing="15" WidthRequest="300">
+                <Button Text="BUILD APPLICATION" 
+                    FontFamily="InterSemiBold"
+                    Clicked="OnBuildClicked"
+                    HeightRequest="50"
+                    FontSize="16"
+                    Margin="0,0,0,15" />
+
+                <!-- Combined Preview Section -->
+                <Frame Padding="20">
+                    <VerticalStackLayout Spacing="15">
+                        <Label Text="PREVIEW" 
+                           FontFamily="InterSemiBold" 
+                           FontSize="15"
+                           TextColor="{StaticResource Primary}"
+                           HorizontalOptions="Center"/>
+
+                        <!-- Combined Preview -->
+                        <VerticalStackLayout Spacing="10">
+                            <Label Text="Combined Preview" 
+                               HorizontalOptions="Center"
+                               FontFamily="InterSemiBold"
+                               Margin="0,0,0,5" />
+
+                            <Frame WidthRequest="120" 
+                               HeightRequest="120" 
+                               Padding="0" 
+                               BorderColor="{StaticResource Primary}"
+                               BackgroundColor="{StaticResource Gray100}"
+                               CornerRadius="16"
+                               HorizontalOptions="Center">
+                                <AbsoluteLayout>
+                                    <Image x:Name="CombinedBackgroundPreview"
+                                       AbsoluteLayout.LayoutBounds="0,0,1,1"
+                                       AbsoluteLayout.LayoutFlags="All"
+                                       Aspect="AspectFill" />
+                                    <Image x:Name="CombinedForegroundPreview"
+                                       AbsoluteLayout.LayoutBounds="0,0,1,1"
+                                       AbsoluteLayout.LayoutFlags="All"
+                                       Aspect="AspectFit" />
+                                </AbsoluteLayout>
+                            </Frame>
+                        </VerticalStackLayout>
+
+                        <!-- Adaptive Icon Preview with Color Switcher -->
+                        <VerticalStackLayout Spacing="10">
+                            <Label Text="Adaptive Icon Preview" 
+                               HorizontalOptions="Center"
+                               FontFamily="InterSemiBold"
+                               Margin="0,10,0,5" />
+
+                            <Grid RowDefinitions="Auto, Auto" RowSpacing="10">
+                                <Frame Grid.Row="0"
+                                   WidthRequest="120" 
+                                   HeightRequest="120" 
+                                   Padding="0" 
+                                   BorderColor="{StaticResource Primary}"
+                                   BackgroundColor="{StaticResource Gray100}"
+                                   HorizontalOptions="Center">
+                                    <Image x:Name="AdaptiveIconPreview"
+                                       Aspect="AspectFill"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center" />
+                                </Frame>
+
+                                <controls:ColorSwatchesPicker 
+                                Grid.Row="1"
+                                x:Name="ColorPicker"
+                                ColorSelected="OnColorPicker_ColorSelected" />
+                            </Grid>
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </Frame>
+            </VerticalStackLayout>
+        </Grid>
+    </Grid>
+</ContentPage>

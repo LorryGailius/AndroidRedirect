@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<?xaml-comp compile="true" ?>
+<ResourceDictionary 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <!-- Note: For Android please see also Platforms\Android\Resources\values\colors.xml -->
+
+    <Color x:Key="Primary">#F6C177</Color>
+    <!-- Yellow accent -->
+    <Color x:Key="PrimaryLight">#FFECC9</Color>
+    <!-- Lighter yellow -->
+    <Color x:Key="Secondary">#EBD6AF</Color>
+    <!-- Soft yellow -->
+    <Color x:Key="Tertiary">#EB6F92</Color>
+    <!-- Rose Pine rose -->
+    <Color x:Key="White">#E0DEF4</Color>
+    <!-- Rose Pine text (light purple) -->
+    <Color x:Key="Black">#191724</Color>
+    <!-- Rose Pine base (darkest) -->
+    <Color x:Key="Background">#1F1D2E</Color>
+    <!-- Rose Pine surface (dark) -->
+    <Color x:Key="Gray100">#26233A</Color>
+    <!-- Rose Pine overlay (dark purple) -->
+    <Color x:Key="Gray200">#2A273F</Color>
+    <Color x:Key="Gray300">#393552</Color>
+    <Color x:Key="Gray400">#47435C</Color>
+    <Color x:Key="Gray500">#6E6A86</Color>
+    <!-- Rose Pine muted -->
+    <Color x:Key="Gray600">#908999</Color>
+    <Color x:Key="Gray900">#C4A7E7</Color>
+    <!-- Rose Pine highlight med -->
+    <Color x:Key="Gray950">#E0DEF4</Color>
+    <!-- Rose Pine text (light purple) -->
+
+    <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource Primary}"/>
+    <SolidColorBrush x:Key="PrimaryLightBrush" Color="{StaticResource PrimaryLight}"/>
+    <SolidColorBrush x:Key="SecondaryBrush" Color="{StaticResource Secondary}"/>
+    <SolidColorBrush x:Key="TertiaryBrush" Color="{StaticResource Tertiary}"/>
+    <SolidColorBrush x:Key="WhiteBrush" Color="{StaticResource White}"/>
+    <SolidColorBrush x:Key="BlackBrush" Color="{StaticResource Black}"/>
+    <SolidColorBrush x:Key="BackgroundBrush" Color="{StaticResource Background}"/>
+    <SolidColorBrush x:Key="Gray100Brush" Color="{StaticResource Gray100}"/>
+    <SolidColorBrush x:Key="Gray200Brush" Color="{StaticResource Gray200}"/>
+    <SolidColorBrush x:Key="Gray300Brush" Color="{StaticResource Gray300}"/>
+    <SolidColorBrush x:Key="Gray400Brush" Color="{StaticResource Gray400}"/>
+    <SolidColorBrush x:Key="Gray500Brush" Color="{StaticResource Gray500}"/>
+    <SolidColorBrush x:Key="Gray600Brush" Color="{StaticResource Gray600}"/>
+    <SolidColorBrush x:Key="Gray900Brush" Color="{StaticResource Gray900}"/>
+    <SolidColorBrush x:Key="Gray950Brush" Color="{StaticResource Gray950}"/>
+
+    <!-- Update fonts for Rose Pine aesthetic -->
+    <Style TargetType="Button">
+        <Setter Property="TextColor" Value="{DynamicResource Black}" />
+        <Setter Property="BackgroundColor" Value="{DynamicResource Primary}" />
+        <Setter Property="FontFamily" Value="InterRegular"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="CornerRadius" Value="8"/>
+        <Setter Property="Padding" Value="14,10"/>
+        <Setter Property="MinimumHeightRequest" Value="44"/>
+        <Setter Property="MinimumWidthRequest" Value="44"/>
+    </Style>
+
+    <Style TargetType="Entry">
+        <Setter Property="FontFamily" Value="InterLight"/>
+        <Setter Property="Margin" Value="0,5,0,10"/>
+        <Setter Property="BackgroundColor" Value="{StaticResource Gray100}"/>
+        <Setter Property="TextColor" Value="{StaticResource White}"/>
+        <Setter Property="PlaceholderColor" Value="{StaticResource Gray500}"/>
+    </Style>
+
+    <Style TargetType="Label">
+        <Setter Property="FontFamily" Value="InterLight"/>
+        <Setter Property="TextColor" Value="{DynamicResource White}" />
+    </Style>
+
+    <Style TargetType="Frame">
+        <Setter Property="HasShadow" Value="False"/>
+        <Setter Property="BorderColor" Value="{StaticResource Gray300}"/>
+        <Setter Property="BackgroundColor" Value="{StaticResource Black}"/>
+        <Setter Property="CornerRadius" Value="10"/>
+    </Style>
+</ResourceDictionary>
